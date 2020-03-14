@@ -1,0 +1,82 @@
+body {
+  font: 14px arial, sans-serif;
+}
+.btn-group{
+	float:right;
+}
+.reveal-hardware {
+    opacity: 0;
+    max-height: 0;
+   overflow: hidden;
+}
+
+input[value="1"]:checked ~ div[id="1"]{
+    opacity: 1;
+    max-height: 100px;
+    overflow: visible;
+}
+
+.reveal-software {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+}
+
+input[value="2"]:checked ~ div[id="2"]{
+    opacity: 1;
+    max-height: 100px;
+    overflow: visible;
+}
+
+.reveal-bigdata {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+}
+
+input[value="3"]:checked ~ div[id="3"]{
+    opacity: 1;
+    max-height: 100px;
+    overflow: visible;
+}
+
+#chart{
+	width:700px;
+	margin-top: 20px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.zeroAxis{
+	stroke:black;
+	shape-rendering: crispEdges;
+}
+.labels text{
+	font-size: 10px;
+	font-weight: bold;
+	fill:white;
+}
+
+.button-area {
+  padding: 40px 0 0 50px;
+  float: left;
+}
+
+.app-button {
+  display: inline-block;
+  margin-bottom: 3px;
+}

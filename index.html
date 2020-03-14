@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8">
+        <title>Tech Stock Graphing</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="https://d3js.org/d3-time.v1.min.js"></script>
+	<script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+	<script>
+	var format = d3.timeFormat("%x");
+	</script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css">
+
+    </head>
+<body>
+	<h1>Tech Stock History</h1>
+	<h3>Hardware, Software, and Big Data Comparisons</h3>
+<form>
+    <fieldset>
+
+        <legend>Choose stock type:</legend>
+        <input type="radio" name="stock" id="hardware" value="1">
+        <label for="hardware" class="stock-label">Hardware</label>
+        <div class="reveal-hardware" id="1">
+          <input type="checkbox" id="Apple-hardware" class="hardware-label" name="AAPL" value="AAPL">
+          <label for="Apple-hardware" class="hardware-label">Apple</label>
+
+          <input type="checkbox" id="IBM-hardware" class="hardware-label" name="IBM" value="IBM">
+          <label for="IBM-hardware" class="hardware-label">IBM</label>
+
+          <input type="checkbox" id="NVDA-hardware" class="hardware-label" name="NVDA"  value="NVDA">
+          <label for="NVDA-hardware" class="hardware-label">Nvidia</label>
+
+          <input type="checkbox" id="AMD-hardware" class="hardware-label" name="AMD" value="AMD">
+          <label for="AMD-hardware" class="hardware-label">AMD</label>
+
+          <input type="checkbox" id="INTL-hardware" class="hardware-label" name="INTL" value="INTL">
+          <label for="INTL-hardware" class="hardware-label">Intel</label>
+
+          <input type="checkbox" id="MSI-hardware" class="hardware-label" name="MSI" value="MSI">
+          <label for="MSI-hardware" class="hardware-label">Motorola Solution</label>
+
+          <input type="checkbox" id="MSFT-hardware" class="hardware-label" name="MSFT" value="MSFT">
+          <label for="MSFT-hardware" class="hardware-label">Mircosoft</label>
+
+          <input type="checkbox" id="MMM-hardware" class="hardware-label" name="MMM" value="MMM">
+          <label for="MMM-hardware" class="hardware-label">3M</label>
+
+          <input type="checkbox" id="QCOM-hardware" class="hardware-label" name="QCOM" value="QCOM">
+          <label for="QCOM-hardware" class="hardware-label">Qualcomm</label>
+        </div>
+
+        <input type="radio" name="stock" id="software" value="2">
+        <label for="software" class="stock-label">Software</label>
+        <div class="reveal-software" id="2">
+          <input type="checkbox" id="MSFT-software" name="MSFT" class="soft-label" value="MSFT">
+          <label for="MSFT-software" class="soft-label">Microsoft</label>
+
+          <input type="checkbox" id="ORCL-software" name="ORCL" class="soft-label" value="ORCL">
+          <label for="ORCL-software" class="soft-label">Oracle</label>
+
+          <input type="checkbox" id="IBM-software" name="IBM" class="soft-label" value="IBM">
+          <label for="IBM-software" class="soft-label">IBM</label>
+
+          <input type="checkbox" id="SYMC-software" name="SYMC" class="soft-label" value="SYMC">
+          <label for="SYMC-software" class="soft-label">Synacor</label>
+
+          <input type="checkbox" id="VMW-software" name="VMW" class="soft-label" value="VMW">
+          <label for="VMW-software" class="soft-label">VMware</label>
+
+          <input type="checkbox" id="CRM-software" name="CRM" class="soft-label" value="CRM">
+          <label for="CRM-software" class="soft-label">Salesforce</label>
+
+          <input type="checkbox" id="FB-software" name="FB" class="soft-label" value="FB">
+          <label for="FB-software" class="soft-label">Facebook</label>
+        </div>
+
+        <input type="radio" name="stock" id="bigdata" value="3">
+        <label for="bigdata" class="stock-label">Big Data</label>
+        <div class="reveal-bigdata" id="3">
+
+          <input type="checkbox" id="IBM-bigdata" name="IBM" class="bigdata-label" value="IBM">
+          <label for="IBM-bigdata" class="bigdata-label">IBM</label>
+
+          <input type="checkbox" id="ORCL-bigdata" name="ORCL" class="bigdata-label" value="ORCL">
+          <label for="ORCL-bigdata" class="bigdata-label">Oracle</label>
+
+          <input type="checkbox" id="SAP-bigdata" name="SAP" class="bigdata-label" value="SAP">
+          <label for="SAP-bigdata" class="bigdata-label">SAP</label>
+
+          <input type="checkbox" id="MSFT-bigdata" name="MSFT" class="bigdata-label" value="MSFT">
+          <label for="MSFT-bigdata" class="bigdata-label">Microsoft</label>
+
+          <input type="checkbox" id="TDC-bigdata" name="TDC" class="bigdata-label" value="TDC">
+          <label for="TDC-bigdata" class="bigdata-label">Teradata Corp.</label>
+
+        </div>
+
+        <input type="reset" value="reset">
+
+    </fieldset>
+</form>
+<h5> Note: Please select the last set of time frame buttons after switching to percent change graph and back!</h5>
+<h4> Number of Clicks: <a id = "clicks">0</a> </h4>
+
+<div id="chart">
+	<div class="btn-group" data-toggle="buttons">
+	  <label id="priceBtn" class="btn btn-primary active">
+	    <input type="radio" name="options"  autocomplete="off" checked>Daily Price
+	  </label>
+	  <label id="changeBtn" class="btn btn-primary">
+	    <input type="radio" name="options" autocomplete="off">Daily Percent Change
+	  </label>
+	</div>
+	<div class='button-area'>
+ 	</div>
+
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="script.js"></script>
+
+</body>
+</html>
